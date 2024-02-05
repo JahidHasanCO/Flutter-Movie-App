@@ -21,11 +21,12 @@ class _MovieApiService implements MovieApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<MovieResultModel>> getNowPlayingMovies({
-    bool? include_adult,
-    bool? include_video,
+  Future<HttpResponse<MovieModel>> getNowPlayingMovies({
+    String api_key = api_key,
+    String? include_adult,
+    String? include_video,
     String? language,
-    int? page,
+    String? page,
     String? sort_by,
     String? with_release_type,
     String? release_date_gte,
@@ -33,6 +34,7 @@ class _MovieApiService implements MovieApiService {
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'api_key': api_key,
       r'include_adult': include_adult,
       r'include_video': include_video,
       r'language': language,
@@ -46,7 +48,7 @@ class _MovieApiService implements MovieApiService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<MovieResultModel>>(Options(
+        _setStreamType<HttpResponse<MovieModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -62,7 +64,7 @@ class _MovieApiService implements MovieApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MovieResultModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
