@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/features/now_playing_movies/presentation/bloc/now_playing_movie/remote/remote_movie_bloc.dart';
 import 'package:movieapp/features/now_playing_movies/presentation/bloc/now_playing_movie/remote/remote_movie_state.dart';
+import 'package:movieapp/features/now_playing_movies/presentation/widgets/movie_card.dart';
 
 class NowPlaying extends StatelessWidget {
   const NowPlaying({Key? key}) : super(key: key);
@@ -37,11 +38,15 @@ class NowPlaying extends StatelessWidget {
         );
       }
       if (state is RemoteMoviesDone) {
-        return ListView.builder(itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('$index'),
-          );
-        });
+        debugPrint('Movies: ${state.movies}');
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            return MovieCard(
+              movie: state.movies![index],
+            );
+          },
+          itemCount: state.movies!.length,
+        );
       }
 
       return const SizedBox();
