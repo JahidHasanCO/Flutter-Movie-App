@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movieapp/features/now_playing_movies/domain/entities/MovieEntity.dart';
+import 'package:movieapp/features/now_playing_movies/domain/entities/movie_entity.dart';
 
 abstract class RemoteMovieState extends Equatable {
   final List<MovieEntity>? movies;

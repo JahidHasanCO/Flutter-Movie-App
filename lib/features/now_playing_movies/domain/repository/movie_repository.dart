@@ -1,6 +1,6 @@
-import '../entities/MovieEntity.dart';
+import '../entities/movie_entity.dart';
 import '../../../../core/resources/data_state.dart';
 
-abstract class NowPlayingMovieRepository{
+abstract class NowPlayingMovieRepository {
   Future<DataState<List<MovieEntity>>> getNowPlayingMovies();
 }
